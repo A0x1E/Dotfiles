@@ -1,0 +1,15 @@
+use-grammars = { only = [ "rust" ] }
+
+[[language]]
+name = "rust"
+
+[language-server.rust-analyzer.config.check]
+command = "clippy"
+
+# [language.debugger]
+# name = "lldb-vscode"
+# transport = "stdio"
+# command = "lldb-vscode"
+
+[language.config]
+checkOnSave = { command = "check" }
