@@ -27,19 +27,12 @@ st:
 	sudo make clean install --makefile=st/Makefile
 
 helix:
-	from="helix/*"
-	to="~/.config/helix"
-	lldb="$to/bin"
+	sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
+	cd $(dirname $(which lldb-17))
+	sudo ln -s lldb-vscode-17 lldb-vscode
 
-	mkdir -p $to && cp -r $from $to
-	mkdir $lldb
-	
-	sudo curl -L "https://github.com/vadimcn/vscode-lldb/releases/download/v1.7.0/codelldb-x86_64-linux.vsix" -o "$lldb/codelldb-x86_64-linux.zip"
-	unzip "$lldb/codelldb-x86_64-linux.zip" "$lldb/extension/adapter/*" "$lldb/extension/lldb/*"
-	mv $lldb/extension/ $lldb/codelldb_adapter
-	
-	sudo rm "$lldb/codelldb-x86_64-linux.zip"
-	ln -s $lldb/codelldb_adapter/adapter/codelldb /usr/bin/codelldb
+	mkdir -p ~/.config/helix
+	mv helix/* ~/.config/helix
 
 nvim:
 	from="nvim/*"
