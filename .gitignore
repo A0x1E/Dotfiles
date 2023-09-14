@@ -1,3 +1,8 @@
-dwm/dwm
-st/st
-dmenu/dmenu
+# suckless stuff
+.config/suckless/dmenu/dmenu
+.config/suckless/dwm/dwm
+.config/suckless/slstatus/slstatus
+.config/suckless/st/st
+
+# macos stuff
+._*
