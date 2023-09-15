@@ -58,14 +58,19 @@ set_audio() {
 
 move_dotfiles() {
   cp -r dot-dwm ~/.dwm
-  cp -r dot-config ~/.config
-  cp -r dot-local ~/.local
+  cp -r dot-config/* ~/.config/
+  cp -r dot-local/* ~/.local/
   cp -r dot-xinitrc ~/.xinitrc
+  cp -r dot-bashrc ~/.bashrc
 }
 
 get_user_deps() {
   GUI_USER_DEPS="firefox"
   TUI_USER_DEPS="git curl neovim rustup python nodejs unzip"
 
-  sudo xbps-install -uy {$TUI_USER_DEPS,$GUI_USER_DEPS} 
+  sudo xbps-install -uy {$TUI_USER_DEPS,$GUI_USER_DEPS}
+
+  git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
 }
+
+set_de

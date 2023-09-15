@@ -1,0 +1,48 @@
+# .bashrc
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=auto'
+PS1='[\u@\h \W]\$ '
+. "$HOME/.cargo/env"
+
+# Gruvbox colorscheme
+C_BG0="\e]P0282828"
+C_GRAY="\e]P8928374"
+C_DARK_RED="\e]P1cc241d"
+C_RED="\e]P9fb4934"
+C_DARK_GREEN="\e]P298971a"
+C_GREEN="\e]PAb8bb26"
+C_DARK_YELLOW="\e]P3d79921"
+C_YELLOW="\e]PBfabd2f"
+C_DARK_BLUE="\e]P4458588"
+C_BLUE="\e]PC83a598"
+C_DARK_MAGENTA="\e]P5b16286"
+C_MAGENTA="\e]PDd3869b"
+C_DARK_CYAN="\e]P6689d6a"
+C_CYAN="\e]PE8ec07c"
+C_FG4="\e]P7a89984"
+C_FG1="\e]PFebdbb2"
+
+if [ "$TERM" = "linux"]; then
+  echo -en $C_BG0
+  echo -en $C_GRAY
+  echo -en $C_DARK_RED
+  echo -en $C_RED
+  echo -en $C_DARK_GREEN
+  echo -en $C_GREEN
+  echo -en $C_DARK_YELLOW
+  echo -en $C_YELLOW
+  echo -en $C_DARK_BLUE
+  echo -en $C_BLUE
+  echo -en $C_MAGENTA
+  echo -en $C_DARK_CYAN
+  echo -en $C_CYAN
+  echo -en $C_FG4
+  echo -en $C_FG1
+  clear
+fi
+
+
+export PATH="/home/aoxie/.local/bin:$PATH"

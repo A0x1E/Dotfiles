@@ -65,8 +65,9 @@ static const char unknown_str[] = "n/a";
  */
 static const struct arg args[] = {
 	/* function format          argument */
-	{ keymap, "L: %s | " },
-	{ ram_perc, "M: %s | " },
-	{ cpu_perc, "C: %s | " },
+	{ run_command, "S: %s ／ ", "pamixer --get-volume | sed 's/muted/MUTED/g'"},
+	{ cpu_perc, "C: %s ／ " },
+	{ ram_perc, "M: %s ／ " },
+  { keymap, "L: %s ／ " },
 	{ datetime, "%s",           "%F %T" },
 };
