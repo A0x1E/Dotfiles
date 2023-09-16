@@ -3,7 +3,7 @@ set_runit() {
   ELOGIND_SV=/var/service/elogind
   SDDM_SV=/var/service/sddm
 
-  sudo xbps-install -uy NetworkManager elogind
+  sudo xbps-install -uy NetworkManager elogind sddm
 
   if [ ! -d "$NETWORK_SV" ]; then      
     sudo xbps-install -uy NetworkManager 
@@ -38,11 +38,12 @@ set_de() {
   cd ~/suckless/slstatus && sudo make clean install && cd $OLDPWD
 
   sudo cp xserver/dwm.desktop /usr/share/xsessions/
+  mkdir -p ~/{Documents,Projects,Pictures,Music}
 }
 
 set_fonts() {
-  FONT_NAMES="UbuntuMonoNerdFontMono-Regular.ttf"
-  FONT_NAMES_SHORT="UbuntuMono"
+  FONT_NAMES="CaskaydiaCoveNerdFontMono-Regular.ttf"
+  FONT_NAMES_SHORT="CascadiaCode"
   FONT_PATH="/usr/share/fonts/TTF"
   URL="https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/{$FONT_NAMES_SHORT}/Regular/{$FONT_NAMES}"
   
@@ -56,6 +57,15 @@ set_audio() {
   sudo xbps-install -uy pipewire pulseaudio-utils wireplumber pamixer
 }
 
+get_user_deps() {
+  GUI_USER_DEPS="firefox"
+  TUI_USER_DEPS="git curl neovim rustup python nodejs unzip"
+
+  sudo xbps-install -uy {$TUI_USER_DEPS,$GUI_USER_DEPS}
+  
+  git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+}
+
 move_dotfiles() {
   cp -r dot-dwm ~/.dwm
   cp -r dot-config/* ~/.config/
@@ -64,13 +74,3 @@ move_dotfiles() {
   cp -r dot-bashrc ~/.bashrc
 }
 
-get_user_deps() {
-  GUI_USER_DEPS="firefox"
-  TUI_USER_DEPS="git curl neovim rustup python nodejs unzip"
-
-  sudo xbps-install -uy {$TUI_USER_DEPS,$GUI_USER_DEPS}
-
-  git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
-}
-
-set_de
