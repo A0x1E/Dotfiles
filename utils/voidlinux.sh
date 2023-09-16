@@ -31,13 +31,14 @@ set_de() {
   # creates a directory and copies files at there
   mkdir -p ~/suckless && cp -r suckless/{dmenu,dwm,slstatus,st}/ "$_"
 
+  sudo cp xserver/dwm.desktop /usr/share/xsessions/
+  
   # move to user tool-dirs, build, move back to project
   cd ~/suckless/dwm && sudo make clean install && cd $OLDPWD
   cd ~/suckless/dmenu && sudo make clean install && cd $OLDPWD
   cd ~/suckless/st && sudo make clean install && cd $OLDPWD
   cd ~/suckless/slstatus && sudo make clean install && cd $OLDPWD
 
-  sudo cp xserver/dwm.desktop /usr/share/xsessions/
   mkdir -p ~/{Documents,Projects,Pictures,Music}
 }
 
