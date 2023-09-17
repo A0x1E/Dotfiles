@@ -38,26 +38,37 @@ local config = {
       },
       {
         "nvim-neorg/neorg",
-        config = function()
-          require("neorg").setup {
-            load = {
-              ["core.defaults"] = {}, -- Loads default behaviour
-              ["core.concealer"] = {}, -- Adds pretty icons to your documents
-              ["core.dirman"] = { -- Manages Neorg workspaces
-                config = {
-                  workspaces = {
-                    notes = "~/notes",
-                  },
+        build = ":Neorg sync-parsers",
+        dependencies = {"nvim-lua/plenary.nvim"},
+        event = "VeryLazy",
+        opts = {
+          load = {
+            ["core.defaults"] = {}, -- Loads default behaviour
+            ["core.concealer"] = {}, -- Adds pretty icons to your documents
+            ["core.keybinds"] = {}, -- Adds default keybinds
+            ["core.journal"] = {}, -- Enables support for the journal module
+            ["core.dirman"] = { -- Manages Neorg workspaces
+              config = {
+                workspaces = {
+                  notes = "~/notes",
                 },
-                run = ":Neorg sync-parsers",
-                requires = "nvim-lua/plenary.nvim",
+                default_workspace = "notes",
               },
             },
-          }
-        end,
+          },
+        },
+      },
+      {
+        "linux-cultist/venv-selector.nvim",
+        dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap-python" },
+        opts = {},
+        event = "VeryLazy",
+        keys = {{
+          "<leader>vs", "<cmd>:VenvSelect<cr>",
+          "<leader>vc", "<cmd>:VenvSelectCached<cr>"
+        }}
       },
     },
   }
-  
-  return config
-  
+
+return config
