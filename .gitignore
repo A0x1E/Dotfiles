@@ -3,6 +3,9 @@
 .config/suckless/dwm/dwm
 .config/suckless/slstatus/slstatus
 .config/suckless/st/st
+*.o
+*.rej
+*.orig
 
 # macos stuff
 ._*

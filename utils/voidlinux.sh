@@ -43,15 +43,7 @@ set_de() {
 }
 
 set_fonts() {
-  FONT_NAMES="CaskaydiaCoveNerdFontMono-Regular.ttf"
-  FONT_NAMES_SHORT="CascadiaCode"
-  FONT_PATH="/usr/share/fonts/TTF"
-  URL="https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/{$FONT_NAMES_SHORT}/Regular/{$FONT_NAMES}"
-  
-  # download fonts from url to system TTF-path
-  cd $FONT_PATH && curl -fLOs $URL
-  # back to project dir
-  cd $OLDPWD
+  sudo xbps-install font-cozette
 }
 
 set_audio() {
@@ -60,11 +52,13 @@ set_audio() {
 
 get_user_deps() {
   GUI_USER_DEPS="firefox"
-  TUI_USER_DEPS="git curl neovim rustup python nodejs unzip"
+  TUI_USER_DEPS="git curl hx rustup python nodejs unzip"
 
   sudo xbps-install -uy {$TUI_USER_DEPS,$GUI_USER_DEPS}
   
-  git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+  #git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+  rustup component add rust-analyzer
+  cargo install nu
 }
 
 move_dotfiles() {

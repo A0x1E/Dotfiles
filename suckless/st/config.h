@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "CaskaydiaCoveNerdFont-Regular:pixelsize=13:antialias=true:autohint=true";
+static char *font = "CozetteVector:pixelsize=17:antialias=true:autohint=false";
 static int borderpx = 2;
 
 /*
