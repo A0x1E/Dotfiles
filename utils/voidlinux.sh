@@ -29,10 +29,10 @@ set_de() {
   sudo xbps-install -uy xwallpaper
 
   # creates a directory and copies files at there
-  mkdir -p ~/suckless && cp -r suckless/{dmenu,dwm,slstatus,st}/ "$_"
+  mkdir -p ~/suckless && sudo cp -r suckless/{dmenu,dwm,slstatus,st}/ "$_"
 
-  sudo cp xserver/dwm.desktop /usr/share/xsessions/
-  
+  sudo mkdir -p /usr/share/xsessions/ && sudo cp xserver/dwm.desktop "$_"
+ 
   # move to user tool-dirs, build, move back to project
   cd ~/suckless/dwm && sudo make clean install && cd $OLDPWD
   cd ~/suckless/dmenu && sudo make clean install && cd $OLDPWD
@@ -43,7 +43,7 @@ set_de() {
 }
 
 set_fonts() {
-  sudo xbps-install font-cozette
+  sudo xbps-install -uy font-cozette
 }
 
 set_audio() {
@@ -52,11 +52,17 @@ set_audio() {
 
 get_user_deps() {
   GUI_USER_DEPS="firefox"
-  TUI_USER_DEPS="git curl hx rustup python nodejs unzip"
+  TUI_USER_DEPS="git curl helix rustup python nodejs unzip"
+  LIB_USER_DEPS="openssl-devel"
 
-  sudo xbps-install -uy {$TUI_USER_DEPS,$GUI_USER_DEPS}
+  sudo xbps-install -uy {$TUI_USER_DEPS,$GUI_USER_DEPS,$LIB_USER_DEPS}
   
   #git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+  rustup-init -y
+
+  # reload bashrc
+  . ~/.bashrc
+
   rustup component add rust-analyzer
   cargo install nu
 }
@@ -65,7 +71,7 @@ move_dotfiles() {
   cp -r dot-dwm ~/.dwm
   cp -r dot-config/* ~/.config/
   cp -r dot-local/* ~/.local/
-  cp -r dot-xinitrc ~/.xinitrc
+  # cp -r dot-xinitrc ~/.xinitrc
   cp -r dot-bashrc ~/.bashrc
 }
 
